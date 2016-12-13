@@ -1,0 +1,65 @@
+private void gmap_Load(object sender, EventArgs e)
+        {
+            
+            gmap.MapProvider = BingHybridMapProvider.Instance;
+            GMaps.Instance.Mode = AccessMode.ServerOnly;
+            //GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
+            gmap.Position = new GMap.NET.PointLatLng(03.012687, 101.3472);
+            gmap.ShowCenter = false;
+
+            //position of ship 1
+            GMapOverlay markers = new GMapOverlay("markers");
+            GMapMarker marker1 = new GMarkerGoogle
+                (
+                new PointLatLng(03.012687, 101.3472),
+                new Bitmap("kapal.png")
+                );
+            markers.Markers.Add(marker1);
+            gmap.Overlays.Add(markers);
+
+            //ship info
+            marker1.ToolTipText = "Nautica Tg Puteri \nspeed: 15 knot\ndestination: Arizona,USA ";
+            marker1.ToolTip.Fill = Brushes.Black;
+            marker1.ToolTip.Foreground = Brushes.White;
+            marker1.ToolTip.Stroke = Pens.Black;
+            marker1.ToolTip.TextPadding = new Size(20, 20);
+
+            //position of ship 2
+         
+            GMapMarker marker2 = new GMarkerGoogle(
+                new PointLatLng(03.012423, 101.3575),
+                new Bitmap("kapal.png"));
+            markers.Markers.Add(marker2);
+            gmap.Overlays.Add(markers);
+
+            //ship info
+            marker2.ToolTipText = "Nautica Tg TUAN \nspeed: 0 knot\ndestination:NA ";
+            marker2.ToolTip.Fill = Brushes.Black;
+            marker2.ToolTip.Foreground = Brushes.White;
+            marker2.ToolTip.Stroke = Pens.Black;
+            marker2.ToolTip.TextPadding = new Size(20, 20);
+
+            GMapMarker marker3 = new GMarkerGoogle(
+               new PointLatLng(03.012072, 101.3576),
+               new Bitmap("kapal.png"));
+            markers.Markers.Add(marker3);
+            gmap.Overlays.Add(markers);
+
+            //ship info
+            marker3.ToolTipText = "MV Bunga Melati\nspeed:0 knot\ndestination: Singapore ";
+            marker3.ToolTip.Fill = Brushes.Black;
+            marker3.ToolTip.Foreground = Brushes.White;
+            marker3.ToolTip.Stroke = Pens.Black;
+            marker3.ToolTip.TextPadding = new Size(20, 20);
+
+            //creating routes
+            GMapOverlay routes = new GMapOverlay("routes");
+            List<PointLatLng> points = new List<PointLatLng>();
+            points.Add(new PointLatLng(3.012268, 101.357774));
+            points.Add(new PointLatLng(3.002679, 101.346039));
+            points.Add(new PointLatLng(2.982692, 101.320670));
+            GMapRoute route = new GMapRoute(points, "MV allan sea");
+            route.Stroke = new Pen(Color.Red, 3);
+            routes.Routes.Add(route);
+            gmap.Overlays.Add(routes);  
+        }
